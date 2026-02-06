@@ -5,10 +5,14 @@ import (
 	"quentinha_golang/src/configuration/logger"
 	"quentinha_golang/src/configuration/validation"
 	"quentinha_golang/src/controller/model/request"
-	"quentinha_golang/src/controller/model/response"
+	"quentinha_golang/src/model"
 
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
+)
+
+var (
+	UserDomainInerface model.UserDomainInterface
 )
 
 func CreateUser(c *gin.Context) {
@@ -31,11 +35,13 @@ func CreateUser(c *gin.Context) {
 	logger.Info("User created successfully",
 		zap.String("journey", "createUser"),
 	)
-	response := response.UserResponse{
-		ID:    "teste",
-		Name:  userRequest.Name,
-		Email: userRequest.Email,
-		Age:   userRequest.Age,
+
+	domain := model.NewUserDomain(userRequest.Email, userRequest.Password, userRequest.Name, userRequest.Age)
+
+	if err := domain.CreateUser(); err != nil {
+		c.JSON(err.Code, err)
+		return
 	}
-	c.JSON(http.StatusOK, response)
+
+	c.String(http.StatusOK, "")
 }
