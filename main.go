@@ -1,12 +1,11 @@
 package main
 
 import (
+	"context"
 	"log"
+	"quentinha_golang/src/configuration/database/mongodb"
 	"quentinha_golang/src/configuration/logger"
-	"quentinha_golang/src/controller"
 	"quentinha_golang/src/controller/routes"
-	"quentinha_golang/src/model/service"
-
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
@@ -18,9 +17,13 @@ func main() {
 		log.Fatal("Error loading .env file")
 	}
 
-	//Init dependencies
-	service := service.NewUserDomainService()
-	userController := controller.NewUserControllerInterface(service)
+	database, err := mongodb.NewMongoDBConnection(context.Background())
+	if err != nil {
+		log.Fatalf("Error connecting to the database: %s\n", err.Error())
+		return
+	}
+	
+	userController := initDependencies(database)
 
 	router := gin.Default()
 	routes.InitializeRoutes(&router.RouterGroup, userController)
