@@ -6,6 +6,7 @@ import (
 	"quentinha_golang/src/configuration/validation"
 	"quentinha_golang/src/controller/model/request"
 	"quentinha_golang/src/model"
+	"quentinha_golang/src/model/service"
 
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
@@ -37,8 +38,9 @@ func CreateUser(c *gin.Context) {
 	)
 
 	domain := model.NewUserDomain(userRequest.Email, userRequest.Password, userRequest.Name, userRequest.Age)
+	service := service.NewUserDomainService()
 
-	if err := domain.CreateUser(); err != nil {
+	if err := service.CreateUser(domain); err != nil {
 		c.JSON(err.Code, err)
 		return
 	}
