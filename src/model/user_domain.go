@@ -1,10 +1,7 @@
 package model
 
-import (
-)
-
 type userDomain struct {
-	id      string
+	id       string
 	email    string
 	password string
 	name     string
