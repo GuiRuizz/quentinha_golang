@@ -6,6 +6,7 @@ import (
 	"quentinha_golang/src/model"
 
 	"go.uber.org/zap"
+	"golang.org/x/crypto/bcrypt"
 )
 
 func (ud *userDomainService) FindUserByEmailServices(email string) (model.UserDomainInterface, *rest_err.RestErr) {
@@ -17,3 +18,38 @@ func (ud *userDomainService) FindUserByIDServices(id string) (model.UserDomainIn
 	logger.Info("Init FindUserByIDServices 	", zap.String("journey", "FindUserByIDServices"))
 	return ud.userRepository.FindUserByID(id)
 }
+
+func (ud *userDomainService) findUserByEmailAndPasswordServices(
+	email string,
+	password string,
+) (model.UserDomainInterface, *rest_err.RestErr) {
+
+	logger.Info("Init findUserByEmailAndPassword services.",
+		zap.String("journey", "findUserByEmailAndPasswordServices"),
+	)
+
+	// 1️⃣ Buscar usuário apenas por email
+	user, err := ud.userRepository.FindUserByEmail(email)
+	if err != nil {
+		return nil, rest_err.NewUnauthorizedError(
+			"User or password is invalid",
+			nil,
+		)
+	}
+
+	// 2️⃣ Comparar senha usando bcrypt
+	errCompare := bcrypt.CompareHashAndPassword(
+		[]byte(user.GetPassword()), // hash salvo no banco
+		[]byte(password),           // senha digitada
+	)
+
+	if errCompare != nil {
+		return nil, rest_err.NewUnauthorizedError(
+			"User or password is invalid",
+			nil,
+		)
+	}
+
+	return user, nil
+}
+
