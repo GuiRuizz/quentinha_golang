@@ -3,7 +3,8 @@ package routes
 import (
 	"quentinha_golang/src/controller"
 	"quentinha_golang/src/model"
-
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 	"github.com/gin-gonic/gin"
 )
 
@@ -18,5 +19,8 @@ func InitializeRoutes(r *gin.RouterGroup, userController controller.UserControll
 
 	// Login routes
 	r.POST("/login", userController.LoginUser)
+
+	// Swagger documentation route
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 }
