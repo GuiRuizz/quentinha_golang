@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  meuprimeirocrudgo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      MONGODBURL: mongodb://mongodb:27017
+      MONGODB_USER_DB: users
+      JWT_SECRET_KEY: s8d18sd185sd1f6451ds6f4516sd5f1r68f4d651fs5df86er
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongodb
+    networks:
+      - meuprimeirocrudgo_network
+
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - meuprimeirocrudgo_network
+
+networks:
+  meuprimeirocrudgo_network:
