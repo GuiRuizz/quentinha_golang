@@ -12,7 +12,6 @@ import (
 	"go.uber.org/zap"
 )
 
-
 func (uc *userControllerInterface) LoginUser(c *gin.Context) {
 	logger.Info("Init loginUser controller",
 		zap.String("journey", "loginUser"),
@@ -32,7 +31,7 @@ func (uc *userControllerInterface) LoginUser(c *gin.Context) {
 
 	domain := model.NewUserLoginDomain(userRequest.Email, userRequest.Password)
 
-	domainResult, err := uc.service.LoginUserServices(domain)
+	domainResult, token, err := uc.service.LoginUserServices(domain)
 	if err != nil {
 		logger.Error("Error trying to call loginUser service",
 			err,
@@ -48,6 +47,7 @@ func (uc *userControllerInterface) LoginUser(c *gin.Context) {
 		zap.String("journey", "loginUser"),
 	)
 
+	c.Header("Authorization", token)
 
 	c.JSON(http.StatusOK, view.ConvertDomainToResponse(
 		domainResult,

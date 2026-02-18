@@ -46,7 +46,7 @@ func (uc *userControllerInterface) FindUserByEmail(c *gin.Context) {
 		errorMessage := rest_err.NewBadRequestError("UserEmail is not a valid user email")
 		c.JSON(errorMessage.Code, errorMessage)
 		return
-	}		
+	}
 
 	userDomain, err := uc.service.FindUserByEmailServices(userEmail)
 	if err != nil {

@@ -2,6 +2,7 @@ package routes
 
 import (
 	"quentinha_golang/src/controller"
+	"quentinha_golang/src/model"
 
 	"github.com/gin-gonic/gin"
 )
@@ -9,8 +10,8 @@ import (
 func InitializeRoutes(r *gin.RouterGroup, userController controller.UserControllerInterface) {
 
 	// User routes
-	r.GET("/getUserById/:userId", userController.FindUserByID)
-	r.GET("/getUserByEmail/:userEmail", userController.FindUserByEmail)
+	r.GET("/getUserById/:userId", model.VerifyTokenMiddleware, userController.FindUserByID)
+	r.GET("/getUserByEmail/:userEmail", model.VerifyTokenMiddleware, userController.FindUserByEmail)
 	r.POST("/createUser", userController.CreateUser)
 	r.PUT("/updateUser/:userId", userController.UpdateUser)
 	r.DELETE("/deleteUser/:userId", userController.DeleteUser)
