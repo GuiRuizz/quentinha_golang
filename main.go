@@ -8,8 +8,16 @@ import (
 	"quentinha_golang/src/controller/routes"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
+	_"quentinha_golang/docs"
 )
 
+// @title Meu Primeiro Projeto em Go | Quetinha App Go
+// @version 1.0
+// @description This is a sample server for user management.
+// @host localhost:8080
+// @BasePath /
+// @schemes http
+// @license MIT
 func main() {
 	logger.Info("About to start user applicaion")
 	err := godotenv.Load()
