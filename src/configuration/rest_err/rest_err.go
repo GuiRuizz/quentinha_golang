@@ -76,3 +76,11 @@ func NewUnauthorizedError(message string, causes []Causes) *RestErr {
 		Causes:  causes,
 	}
 }
+
+func NewUnauthorizedWithNoCausesError(message string) *RestErr {
+	return &RestErr{
+		Message: message,
+		Err:     "unauthorized",
+		Code:    http.StatusUnauthorized,
+	}
+}
