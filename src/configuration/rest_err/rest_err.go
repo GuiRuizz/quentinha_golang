@@ -60,10 +60,27 @@ func NewForbiddenError(message string) *RestErr {
 	}
 }
 
-func NewNotFound(message string) *RestErr {
+func NewNotFoundError(message string) *RestErr {
 	return &RestErr{
 		Message: message,
 		Err:     "not_found",
 		Code:    http.StatusNotFound	,
+	}
+}
+
+func NewUnauthorizedError(message string, causes []Causes) *RestErr {
+	return &RestErr{
+		Message: message,
+		Err:     "unauthorized",
+		Code:    http.StatusUnauthorized,
+		Causes:  causes,
+	}
+}
+
+func NewUnauthorizedWithNoCausesError(message string) *RestErr {
+	return &RestErr{
+		Message: message,
+		Err:     "unauthorized",
+		Code:    http.StatusUnauthorized,
 	}
 }

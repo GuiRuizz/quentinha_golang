@@ -7,15 +7,26 @@ import (
 	"quentinha_golang/src/controller/model/request"
 	"quentinha_golang/src/model"
 	"quentinha_golang/src/view"
-
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 )
+
 
 var (
 	UserDomainInerface model.UserDomainInterface
 )
 
+// CreateUser Creates a new user
+// @Summary Create a new user
+// @Description Create a new user with the provided user information
+// @Tags Users
+// @Accept json
+// @Produce json
+// @Param userRequest body request.UserRequest true "User information for registration"
+// @Success 200 {object} response.UserResponse
+// @Failure 400 {object} rest_err.RestErr
+// @Failure 500 {object} rest_err.RestErr
+// @Router /createUser [post]
 func (uc *userControllerInterface) CreateUser(c *gin.Context) {
 	logger.Info("Init CreateUser controller",
 		zap.String("journey", "createUser"),
@@ -39,7 +50,7 @@ func (uc *userControllerInterface) CreateUser(c *gin.Context) {
 
 	domain := model.NewUserDomain(userRequest.Email, userRequest.Password, userRequest.Name, userRequest.Age)
 
-	domainResult, err := uc.service.CreateUser(domain)
+	domainResult, err := uc.service.CreateUserServices(domain)
 	if err != nil {
 		logger.Error("Error trying to call CreateUser service",
 			err,
