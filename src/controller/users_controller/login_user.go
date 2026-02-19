@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"quentinha_golang/src/configuration/logger"
 	"quentinha_golang/src/configuration/validation"
-	"quentinha_golang/src/controller/model/request"
+	"quentinha_golang/src/controller/model/request/user_request"
 	"quentinha_golang/src/model/domain/users_domain"
 	"quentinha_golang/src/view"
 
@@ -28,7 +28,7 @@ func (uc *userControllerInterface) LoginUser(c *gin.Context) {
 		zap.String("journey", "loginUser"),
 	)
 
-	var userRequest request.UserLogin
+	var userRequest user_request.UserLogin
 
 	if err := c.ShouldBindJSON(&userRequest); err != nil {
 		logger.Error("Error trying to marshal object", err,
