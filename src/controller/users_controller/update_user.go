@@ -5,7 +5,7 @@ import (
 	"quentinha_golang/src/configuration/logger"
 	"quentinha_golang/src/configuration/rest_err"
 	"quentinha_golang/src/configuration/validation"
-	"quentinha_golang/src/controller/model/request"
+	"quentinha_golang/src/controller/model/request/user_request"
 	"quentinha_golang/src/model/domain/users_domain"
 
 	"github.com/gin-gonic/gin"
@@ -32,13 +32,13 @@ func (uc *userControllerInterface) UpdateUser(c *gin.Context) {
 		zap.String("journey", "updateUser"),
 	)
 
-	var userRequest request.UserUpdateRequest
+	var userRequest user_request.UserUpdateRequest
 
 	if err := c.ShouldBindJSON(&userRequest); err != nil {
 		logger.Error("Error trying to marshal object", err,
 			zap.String("controllers", "updateUser"))
 
-		errRest := validation.ValidateUserError(err)
+		errRest := validation.ValidateError(err, "User")
 
 		c.JSON(errRest.Code, errRest)
 		return

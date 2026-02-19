@@ -11,6 +11,7 @@ import (
 	"go.mongodb.org/mongo-driver/v2/bson"
 	"go.uber.org/zap"
 )
+
 // FindUserByID retrieves user information based on the provided user ID.
 // @Summary Find User by ID
 // @Description Retrieves user details based on the user ID provided as a parameter.
@@ -43,7 +44,7 @@ func (uc *userControllerInterface) FindUserByID(c *gin.Context) {
 	}
 
 	logger.Info("FindUserByID controller executed successfully", zap.String("journey", "findUserByID"))
-	c.JSON(http.StatusOK, view.ConvertDomainToResponse(userDomain))
+	c.JSON(http.StatusOK, view.ConvertUserDomainToResponse(userDomain))
 }
 
 // FindUserByEmail retrieves user information based on the provided email.
@@ -79,5 +80,5 @@ func (uc *userControllerInterface) FindUserByEmail(c *gin.Context) {
 	}
 
 	logger.Info("FindUserByEmail controller executed successfully", zap.String("journey", "findUserByEmail"))
-	c.JSON(http.StatusOK, view.ConvertDomainToResponse(userDomain))
+	c.JSON(http.StatusOK, view.ConvertUserDomainToResponse(userDomain))
 }

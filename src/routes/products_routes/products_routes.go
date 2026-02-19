@@ -10,9 +10,9 @@ func InitializeRoutes(r *gin.RouterGroup, productController products_controller.
 
 	// Products routes
 	//TODO: Criar as rotas no controller
+	r.POST("/createProduct", productController.CreateProduct)
 	// r.GET("/getProductById/:productId", productController)
 	// r.GET("/getAllProducts", productController.FindUserByEmail)
-	// r.POST("/createProduct", productController.CreateUser)
 	// r.PUT("/updateProduct/:productId", productController.UpdateUser)
 	// r.DELETE("/deleteUser/:productId", productController.DeleteUser)
 

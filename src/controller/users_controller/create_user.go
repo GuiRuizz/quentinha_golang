@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"quentinha_golang/src/configuration/logger"
 	"quentinha_golang/src/configuration/validation"
-	"quentinha_golang/src/controller/model/request"
+	"quentinha_golang/src/controller/model/request/user_request"
 	"quentinha_golang/src/model/domain/users_domain"
 
 	"quentinha_golang/src/view"
@@ -12,7 +12,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 )
-
 
 var (
 	UserDomainInerface users_domain.UserDomainInterface
@@ -34,13 +33,13 @@ func (uc *userControllerInterface) CreateUser(c *gin.Context) {
 		zap.String("journey", "createUser"),
 	)
 
-	var userRequest request.UserRequest
+	var userRequest user_request.UserRequest
 
 	if err := c.ShouldBindJSON(&userRequest); err != nil {
 		logger.Error("Error trying to marshal object", err,
 			zap.String("controllers", "createUser"))
 
-		errRest := validation.ValidateUserError(err)
+		errRest := validation.ValidateError(err, "User")
 
 		c.JSON(errRest.Code, errRest)
 		return
@@ -68,8 +67,7 @@ func (uc *userControllerInterface) CreateUser(c *gin.Context) {
 		zap.String("journey", "createUser"),
 	)
 
-
-	c.JSON(http.StatusOK, view.ConvertDomainToResponse(
+	c.JSON(http.StatusOK, view.ConvertUserDomainToResponse(
 		domainResult,
 	))
 }

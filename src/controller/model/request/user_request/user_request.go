@@ -1,4 +1,4 @@
-package request
+package user_request
 
 // UserRequest represents the input data for creating a new user.
 // @Summary User Input Data

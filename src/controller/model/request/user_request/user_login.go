@@ -1,4 +1,4 @@
-package request
+package user_request
 
 // UserLogin represents the data required for user login.
 // @Summary User Login Data
