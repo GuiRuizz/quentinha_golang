@@ -36,7 +36,7 @@ func (pc *productControllerInterface) CreateProduct(c *gin.Context) {
 			zap.String("controller", "createProduct"),
 		)
 
-		errRest := validation.ValidateProductError(err)
+		errRest := validation.ValidateError(err, "Product")
 
 		c.JSON(errRest.Code, errRest)
 		return
@@ -54,7 +54,7 @@ func (pc *productControllerInterface) CreateProduct(c *gin.Context) {
 		productRequest.Stock,
 	)
 
-	domainResult, err := pc.service.CreateProductService(domain)
+	domainResult, err := pc.service.CreateProductServices(domain)
 	if err != nil {
 		logger.Error("Error trying to call CreateUserProductService",
 			err,

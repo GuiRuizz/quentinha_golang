@@ -1,6 +1,9 @@
 package products_repository
 
 import (
+	"quentinha_golang/src/configuration/rest_err"
+	"quentinha_golang/src/model/domain/products_domain"
+
 	"go.mongodb.org/mongo-driver/v2/mongo"
 )
 
@@ -17,9 +20,9 @@ type productsRepository struct {
 }
 
 type ProductsRepository interface {
-	// CreateUser(
-	// 	userDomain users_domain.UserDomainInterface,
-	// ) (users_domain.UserDomainInterface, *rest_err.RestErr)
+	CreateProduct(
+		userDomain products_domain.ProductDomainInterface,
+	) (products_domain.ProductDomainInterface, *rest_err.RestErr)
 
 	// FindUserByEmail(email string) (users_domain.UserDomainInterface, *rest_err.RestErr)
 

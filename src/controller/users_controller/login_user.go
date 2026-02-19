@@ -34,7 +34,7 @@ func (uc *userControllerInterface) LoginUser(c *gin.Context) {
 		logger.Error("Error trying to marshal object", err,
 			zap.String("controllers", "loginUser"))
 
-		errRest := validation.ValidateUserError(err)
+		errRest := validation.ValidateError(err, "User")
 
 		c.JSON(errRest.Code, errRest)
 		return

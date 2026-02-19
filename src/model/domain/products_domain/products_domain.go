@@ -90,3 +90,23 @@ func (pd *productDomain) AddReview(score float64) {
 
 	pd.updatedAt = time.Now()
 }
+
+func (pd *productDomain) SetCreatedAt(t time.Time) {
+	pd.createdAt = t
+}
+
+func (pd *productDomain) SetUpdatedAtFromDB(t time.Time) {
+	pd.updatedAt = t
+}
+
+func (pd *productDomain) SetDeletedAt(t *time.Time) {
+	pd.deletedAt = t
+}
+
+func (pd *productDomain) SetRatingAverage(avg *float64) {
+	pd.ratingAverage = avg
+}
+
+func (pd *productDomain) SetRatingCount(count int32) {
+	pd.ratingCount = count
+}

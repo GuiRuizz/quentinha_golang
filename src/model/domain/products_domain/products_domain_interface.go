@@ -18,6 +18,11 @@ type ProductDomainInterface interface {
 	SetID(string)
 	SetUpdatedAt()
 	SetDeleted()
+	SetCreatedAt(time.Time)
+	SetUpdatedAtFromDB(time.Time)
+	SetDeletedAt(*time.Time)
+	SetRatingAverage(*float64)
+	SetRatingCount(int32)
 }
 
 func NewProductDomain(

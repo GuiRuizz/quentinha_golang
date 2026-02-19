@@ -6,10 +6,10 @@ import (
 	_ "quentinha_golang/docs"
 	"quentinha_golang/src/configuration/database/mongodb"
 	"quentinha_golang/src/configuration/logger"
-	"quentinha_golang/src/controller/routes/products_routes"
-	"quentinha_golang/src/controller/routes/users_routes"
 	"quentinha_golang/src/modules/products_modules"
 	"quentinha_golang/src/modules/users_modules"
+	"quentinha_golang/src/routes/products_routes"
+	"quentinha_golang/src/routes/users_routes"
 
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
