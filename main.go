@@ -3,12 +3,13 @@ package main
 import (
 	"context"
 	"log"
+	_ "quentinha_golang/docs"
 	"quentinha_golang/src/configuration/database/mongodb"
 	"quentinha_golang/src/configuration/logger"
 	"quentinha_golang/src/controller/routes"
+
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
-	_"quentinha_golang/docs"
 )
 
 // @title Meu Primeiro Projeto em Go | Quetinha App Go
@@ -20,9 +21,8 @@ import (
 // @license MIT
 func main() {
 	logger.Info("About to start user applicaion")
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
+	if err := godotenv.Load(); err != nil {
+		log.Println("No .env file found")
 	}
 
 	database, err := mongodb.NewMongoDBConnection(context.Background())
@@ -30,7 +30,7 @@ func main() {
 		log.Fatalf("Error connecting to the database: %s\n", err.Error())
 		return
 	}
-	
+
 	userController := initDependencies(database)
 
 	router := gin.Default()

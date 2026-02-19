@@ -25,7 +25,5 @@ EXPOSE 8080
 
 USER quentinhauser
 
-# CMD [ "/app/meuprimeirocrudgo" ]
-
-CMD [ "sleep", "5151851" ]
+CMD [ "/app/meuprimeirocrudgo" ]
 
