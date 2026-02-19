@@ -60,7 +60,7 @@ func (uc *userControllerInterface) LoginUser(c *gin.Context) {
 
 	c.Header("Authorization", token)
 
-	c.JSON(http.StatusOK, view.ConvertDomainToResponse(
+	c.JSON(http.StatusOK, view.ConvertUserDomainToResponse(
 		domainResult,
 	))
 }

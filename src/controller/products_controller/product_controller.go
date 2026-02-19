@@ -2,6 +2,8 @@ package products_controller
 
 import (
 	"quentinha_golang/src/model/service/products_service"
+
+	"github.com/gin-gonic/gin"
 )
 
 func NewProductControllerInterface(serviceInterface products_service.ProductsDomainService) ProductControllerInterface {
@@ -16,7 +18,7 @@ type ProductControllerInterface interface {
 	// FindAllProduct(c *gin.Context)
 	// DeleteProduct(c *gin.Context)
 	// UpdateProduct(c *gin.Context)
-	// CreateProduct(c *gin.Context)
+	CreateProduct(c *gin.Context)
 
 }
 

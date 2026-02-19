@@ -13,7 +13,6 @@ import (
 	"go.uber.org/zap"
 )
 
-
 var (
 	UserDomainInerface users_domain.UserDomainInterface
 )
@@ -68,8 +67,7 @@ func (uc *userControllerInterface) CreateUser(c *gin.Context) {
 		zap.String("journey", "createUser"),
 	)
 
-
-	c.JSON(http.StatusOK, view.ConvertDomainToResponse(
+	c.JSON(http.StatusOK, view.ConvertUserDomainToResponse(
 		domainResult,
 	))
 }
