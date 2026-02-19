@@ -2,11 +2,11 @@ package view
 
 import (
 	"quentinha_golang/src/controller/model/response"
-	"quentinha_golang/src/model"
+	"quentinha_golang/src/model/domain/users_domain"
 )
 
 func ConvertDomainToResponse(
-	userDomain model.UserDomainInterface,
+	userDomain users_domain.UserDomainInterface,
 
 ) response.UserResponse {
 	return response.UserResponse{
