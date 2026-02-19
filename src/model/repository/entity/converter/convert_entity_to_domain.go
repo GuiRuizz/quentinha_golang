@@ -2,10 +2,10 @@ package converter
 
 import (
 	"quentinha_golang/src/model/domain/users_domain"
-	"quentinha_golang/src/model/repository/entity"
+	"quentinha_golang/src/model/repository/entity/user_entity"
 )
 
-func ConvertEntityToDomain(entity entity.UserEntity) users_domain.UserDomainInterface {
+func ConvertEntityToDomain(entity user_entity.UserEntity) users_domain.UserDomainInterface {
 	domain := users_domain.NewUserDomain(
 		entity.Email,
 		entity.Password,
@@ -15,4 +15,3 @@ func ConvertEntityToDomain(entity entity.UserEntity) users_domain.UserDomainInte
 	domain.SetID(entity.ID.Hex())
 	return domain
 }
-

@@ -8,8 +8,8 @@ import (
 	"quentinha_golang/src/configuration/rest_err"
 
 	"quentinha_golang/src/model/domain/users_domain"
-	"quentinha_golang/src/model/repository/entity"
 	"quentinha_golang/src/model/repository/entity/converter"
+	"quentinha_golang/src/model/repository/entity/user_entity"
 	"quentinha_golang/src/model/repository/utils"
 
 	"go.mongodb.org/mongo-driver/v2/bson"
@@ -27,7 +27,7 @@ func (ur *userRepository) FindUserByEmail(email string) (users_domain.UserDomain
 
 	collection := ur.databaseConnection.Collection(collection_name)
 
-	userEntity := &entity.UserEntity{}
+	userEntity := &user_entity.UserEntity{}
 
 	filter := bson.D{{Key: "email", Value: email}}
 
@@ -68,7 +68,7 @@ func (ur *userRepository) FindUserByID(
 	collection_name := os.Getenv(utils.MONGODB_USER_DB)
 	collection := ur.databaseConnection.Collection(collection_name)
 
-	userEntity := &entity.UserEntity{}
+	userEntity := &user_entity.UserEntity{}
 
 	objectId, _ := bson.ObjectIDFromHex(id)
 	filter := bson.D{{Key: "_id", Value: objectId}}
@@ -111,7 +111,7 @@ func (ur *userRepository) FindUserByEmailAndPassword(
 	collection_name := os.Getenv(utils.MONGODB_USER_DB)
 	collection := ur.databaseConnection.Collection(collection_name)
 
-	userEntity := &entity.UserEntity{}
+	userEntity := &user_entity.UserEntity{}
 
 	filter := bson.D{
 		{Key: "email", Value: email},
