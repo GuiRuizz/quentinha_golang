@@ -35,7 +35,7 @@ type ProductsRepository interface {
 		userDomain products_domain.ProductDomainInterface,
 	) *rest_err.RestErr
 
-	// DeleteUser(
-	// 	userId string,
-	// ) *rest_err.RestErr
+	DeleteProduct(
+		productId string,
+	) *rest_err.RestErr
 }
