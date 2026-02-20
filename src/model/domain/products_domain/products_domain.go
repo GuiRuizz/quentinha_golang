@@ -1,6 +1,8 @@
 package products_domain
 
-import "time"
+import (
+	"time"
+)
 
 type productDomain struct {
 	id            string
@@ -14,11 +16,15 @@ type productDomain struct {
 	createdAt     time.Time
 	updatedAt     time.Time
 	deletedAt     *time.Time
+	isActive      *bool
 }
-
 
 func (pd *productDomain) GetID() string {
 	return pd.id
+}
+
+func (pd *productDomain) GetIsActive() *bool {
+	return pd.isActive
 }
 
 func (pd *productDomain) GetName() string {
@@ -109,4 +115,8 @@ func (pd *productDomain) SetRatingAverage(avg *float64) {
 
 func (pd *productDomain) SetRatingCount(count int32) {
 	pd.ratingCount = count
+}
+
+func (pd *productDomain) SetIsActive(isActive bool) {
+	pd.isActive = &isActive
 }

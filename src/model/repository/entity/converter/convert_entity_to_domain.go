@@ -36,6 +36,7 @@ func ConvertProductEntityToDomain(
 	domain.SetCreatedAt(entity.CreatedAt)
 	domain.SetUpdatedAt()
 	domain.SetDeletedAt(entity.DeletedAt)
+	domain.SetIsActive(entity.IsActive)
 
 	return domain
 }

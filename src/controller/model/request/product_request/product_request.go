@@ -45,6 +45,9 @@ type ProductUpdateRequest struct {
 
 	// Product stock quantity.
 	Stock int32 `json:"stock" binding:"required,gte=0" example:"100"`
+
+	// Product avaibility
+	IsActive *bool `json:"isActive" binding:"required" example:"true"`
 }
 
 // ProductReviewRequest represents the input data for adding a review to a product.

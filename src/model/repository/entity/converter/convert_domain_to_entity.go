@@ -31,6 +31,7 @@ func ConvertProductDomainToEntity(
 		CreatedAt:     domain.GetCreatedAt(),
 		UpdatedAt:     domain.GetUpdatedAt(),
 		DeletedAt:     domain.GetDeletedAt(),
+		IsActive:      *domain.GetIsActive(),
 	}
 	return entity
 }

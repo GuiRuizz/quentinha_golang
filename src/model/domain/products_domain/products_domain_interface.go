@@ -14,6 +14,7 @@ type ProductDomainInterface interface {
 	GetCreatedAt() time.Time
 	GetUpdatedAt() time.Time
 	GetDeletedAt() *time.Time
+	GetIsActive() *bool
 
 	SetID(string)
 	SetUpdatedAt()
@@ -23,6 +24,7 @@ type ProductDomainInterface interface {
 	SetDeletedAt(*time.Time)
 	SetRatingAverage(*float64)
 	SetRatingCount(int32)
+	SetIsActive(bool)
 }
 
 func NewProductDomain(
@@ -34,6 +36,7 @@ func NewProductDomain(
 ) ProductDomainInterface {
 
 	now := time.Now()
+	active := true
 
 	return &productDomain{
 		name:          name,
@@ -41,21 +44,32 @@ func NewProductDomain(
 		value:         value,
 		images:        images,
 		stock:         stock,
-		ratingAverage: nil, 
+		ratingAverage: nil,
 		ratingCount:   0,
 		createdAt:     now,
 		updatedAt:     now,
+		isActive:      &active,
 	}
 }
 
+func NewProductUpdateDomain(
+	name string,
+	description string,
+	value int64,
+	images []string,
+	stock int32,
+	isActive *bool,
+) ProductDomainInterface {
 
-//TODO: Fazer o update domain
-// func NewUserUpdateDomain(
-// 	name string,
-// 	age int8,
-// ) ProductDomainInterface {
-// 	return &userDomain{
-// 		name: name,
-// 		age:  age,
-// 	}
-// }
+	now := time.Now()
+
+	return &productDomain{
+		name:        name,
+		description: description,
+		value:       value,
+		images:      images,
+		stock:       stock,
+		updatedAt:   now,
+		isActive:    isActive,
+	}
+}

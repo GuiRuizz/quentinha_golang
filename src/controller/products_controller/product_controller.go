@@ -17,7 +17,7 @@ type ProductControllerInterface interface {
 	FindProductsByID(c *gin.Context)
 	FindAllProducts(c *gin.Context)
 	// DeleteProduct(c *gin.Context)
-	// UpdateProduct(c *gin.Context)
+	UpdateProduct(c *gin.Context)
 	CreateProduct(c *gin.Context)
 
 }

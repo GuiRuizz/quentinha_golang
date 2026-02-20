@@ -33,6 +33,7 @@ func ConvertProductDomainToResponse(
 		RatingCount:   productDomain.GetRatingCount(),
 		CreatedAt:     productDomain.GetCreatedAt(),
 		UpdatedAt:     productDomain.GetUpdatedAt(),
+		IsActive:      *productDomain.GetIsActive(),
 	}
 }
 
