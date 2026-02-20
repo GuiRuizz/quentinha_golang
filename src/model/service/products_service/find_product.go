@@ -13,3 +13,8 @@ func (pd *productsDomainService) FindAllProductsServices(offset int64,
 	logger.Info("Init FindAllProductsServices 	", zap.String("journey", "FindAllProductsServices"))
 	return pd.productsRepository.FindAllProducts(offset, limit)
 }
+
+func (pd *productsDomainService) FindProductsByIDServices(id string) (products_domain.ProductDomainInterface, *rest_err.RestErr) {
+	logger.Info("Init FindProductsByIDServices 	", zap.String("journey", "FindProductsByIDServices"))
+	return pd.productsRepository.FindProductsByID(id)
+}

@@ -2,6 +2,7 @@ package products_repository
 
 import (
 	"context"
+	"fmt"
 	"os"
 	"quentinha_golang/src/configuration/logger"
 	"quentinha_golang/src/configuration/rest_err"
@@ -11,6 +12,7 @@ import (
 	"quentinha_golang/src/model/repository/utils"
 
 	"go.mongodb.org/mongo-driver/v2/bson"
+	"go.mongodb.org/mongo-driver/v2/mongo"
 	"go.mongodb.org/mongo-driver/v2/mongo/options"
 	"go.uber.org/zap"
 )
@@ -67,4 +69,51 @@ func (pr *productsRepository) FindAllProducts(
 		zap.String("journey", "findAllProducts"))
 
 	return productsDomain, total, nil
+}
+
+func (pr *productsRepository) FindProductsByID(
+	id string,
+) (products_domain.ProductDomainInterface, *rest_err.RestErr) {
+
+	logger.Info("Init findAllProducts repository",
+		zap.String("journey", "findAllProducts"))
+
+	collectionName := os.Getenv(utils.MONGODB_PRODUCT_DB)
+	collection := pr.databaseConnection.Collection(collectionName)
+
+	ctx := context.Background()
+
+	productsEntity := &product_entity.ProductEntity{}
+
+	objectId, _ := bson.ObjectIDFromHex(id)
+
+	filter := bson.D{{Key: "_id", Value: objectId}}
+
+	err := collection.FindOne(
+		ctx,
+		filter,
+	).Decode(productsEntity)
+	if err != nil {
+		if err == mongo.ErrNoDocuments {
+			errorMessage := fmt.Sprintf(
+				"User not found with this ID: %s", id)
+			logger.Error(errorMessage,
+				err,
+				zap.String("journey", "findUserByID"))
+
+			return nil, rest_err.NewNotFoundError(errorMessage)
+		}
+		errorMessage := "Error trying to find user by ID"
+		logger.Error(errorMessage,
+			err,
+			zap.String("journey", "findUserByID"))
+
+		return nil, rest_err.NewInternalServerError(errorMessage)
+	}
+
+	logger.Info("FindUserByID repository executed successfully",
+		zap.String("journey", "findUserByID"),
+		zap.String("userId", productsEntity.ID.Hex()))
+
+	return converter.ConvertProductEntityToDomain(*productsEntity), nil
 }

@@ -2,6 +2,7 @@ package products_routes
 
 import (
 	"quentinha_golang/src/controller/products_controller"
+	"quentinha_golang/src/model/domain/users_domain"
 
 	"github.com/gin-gonic/gin"
 )
@@ -11,8 +12,8 @@ func InitializeRoutes(r *gin.RouterGroup, productController products_controller.
 	// Products routes
 	//TODO: Criar as rotas no controller
 	r.POST("/createProduct", productController.CreateProduct)
-	r.GET("/getAllProducts", productController.FindAllProducts)
-	// r.GET("/getProductById/:productId", productController)
+	r.GET("/getAllProducts", users_domain.VerifyTokenMiddleware, productController.FindAllProducts)
+	r.GET("/getProductById/:productId", users_domain.VerifyTokenMiddleware, productController.FindProductsByID)
 	// r.PUT("/updateProduct/:productId", productController.UpdateUser)
 	// r.DELETE("/deleteUser/:productId", productController.DeleteUser)
 
