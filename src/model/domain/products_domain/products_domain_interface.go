@@ -41,7 +41,7 @@ func NewProductDomain(
 		value:         value,
 		images:        images,
 		stock:         stock,
-		ratingAverage: nil, // 👈 ainda não tem avaliação
+		ratingAverage: nil, 
 		ratingCount:   0,
 		createdAt:     now,
 		updatedAt:     now,

@@ -20,7 +20,7 @@ type productsDomainService struct {
 
 type ProductsDomainService interface {
 	CreateProductServices(products_domain.ProductDomainInterface) (products_domain.ProductDomainInterface, *rest_err.RestErr)
-	// FindUserByEmailServices(email string) (users_domain.UserDomainInterface, *rest_err.RestErr)
+	FindAllProductsServices(offset, limit int64) ([]products_domain.ProductDomainInterface, int64, *rest_err.RestErr)
 	// FindUserByIDServices(id string) (users_domain.UserDomainInterface, *rest_err.RestErr)
 	// UpdateUser(string, users_domain.UserDomainInterface) *rest_err.RestErr
 	// DeleteUser(string) *rest_err.RestErr
