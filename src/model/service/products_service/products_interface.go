@@ -23,6 +23,5 @@ type ProductsDomainService interface {
 	FindAllProductsServices(offset, limit int64) ([]products_domain.ProductDomainInterface, int64, *rest_err.RestErr)
 	FindProductsByIDServices(id string) (products_domain.ProductDomainInterface, *rest_err.RestErr)
 	UpdateProductServices(string, products_domain.ProductDomainInterface) *rest_err.RestErr
-	// DeleteUser(string) *rest_err.RestErr
-	// LoginUserServices(userDomain users_domain.UserDomainInterface) (users_domain.UserDomainInterface, string, *rest_err.RestErr)
+	DeleteProductServices(string) *rest_err.RestErr
 }
