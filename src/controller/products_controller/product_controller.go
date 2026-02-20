@@ -14,7 +14,7 @@ func NewProductControllerInterface(serviceInterface products_service.ProductsDom
 
 type ProductControllerInterface interface {
 	//TODO: Criar os controllers
-	// FindProductByID(c *gin.Context)
+	FindProductsByID(c *gin.Context)
 	FindAllProducts(c *gin.Context)
 	// DeleteProduct(c *gin.Context)
 	// UpdateProduct(c *gin.Context)

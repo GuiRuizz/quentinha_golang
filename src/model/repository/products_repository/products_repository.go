@@ -26,6 +26,8 @@ type ProductsRepository interface {
 
 	FindAllProducts(offset, limit int64) ([]products_domain.ProductDomainInterface, int64, *rest_err.RestErr)
 
+	FindProductsByID(id string) (products_domain.ProductDomainInterface, *rest_err.RestErr)
+
 	// FindUserByID(id string) (users_domain.UserDomainInterface, *rest_err.RestErr)
 
 	// UpdateUser(
