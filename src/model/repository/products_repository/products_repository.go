@@ -30,10 +30,10 @@ type ProductsRepository interface {
 
 	// FindUserByID(id string) (users_domain.UserDomainInterface, *rest_err.RestErr)
 
-	// UpdateUser(
-	// 	userId string,
-	// 	userDomain users_domain.UserDomainInterface,
-	// ) *rest_err.RestErr
+	UpdateProduct(
+		productId string,
+		userDomain products_domain.ProductDomainInterface,
+	) *rest_err.RestErr
 
 	// DeleteUser(
 	// 	userId string,
