@@ -24,7 +24,7 @@ type ProductsRepository interface {
 		userDomain products_domain.ProductDomainInterface,
 	) (products_domain.ProductDomainInterface, *rest_err.RestErr)
 
-	// FindUserByEmail(email string) (users_domain.UserDomainInterface, *rest_err.RestErr)
+	FindAllProducts(offset, limit int64) ([]products_domain.ProductDomainInterface, int64, *rest_err.RestErr)
 
 	// FindUserByID(id string) (users_domain.UserDomainInterface, *rest_err.RestErr)
 
