@@ -6,8 +6,10 @@ import (
 	_ "quentinha_golang/docs"
 	"quentinha_golang/src/configuration/database/mongodb"
 	"quentinha_golang/src/configuration/logger"
+	"quentinha_golang/src/modules/address_modules"
 	"quentinha_golang/src/modules/products_modules"
 	"quentinha_golang/src/modules/users_modules"
+	"quentinha_golang/src/routes/address_routes"
 	"quentinha_golang/src/routes/products_routes"
 	"quentinha_golang/src/routes/users_routes"
 
@@ -47,10 +49,12 @@ func main() {
 
 	usersModule := users_modules.NewModule(database)
 	productsModule := products_modules.NewModule(database)
+	addressModule := address_modules.NewModule(database)
 
 	// Routes
 	users_routes.InitializeRoutes(v1, usersModule.Controller)
 	products_routes.InitializeRoutes(v1, productsModule.Controller)
+	address_routes.InitializeRoutes(v1, addressModule.Controller)
 	// Swagger documentation route
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
