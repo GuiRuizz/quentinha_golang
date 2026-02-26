@@ -1,8 +1,10 @@
 package converter
 
 import (
+	"quentinha_golang/src/model/domain/address_domain"
 	"quentinha_golang/src/model/domain/products_domain"
 	"quentinha_golang/src/model/domain/users_domain"
+	"quentinha_golang/src/model/repository/entity/address_entity"
 	"quentinha_golang/src/model/repository/entity/product_entity"
 	"quentinha_golang/src/model/repository/entity/user_entity"
 )
@@ -37,6 +39,22 @@ func ConvertProductEntityToDomain(
 	domain.SetUpdatedAt()
 	domain.SetDeletedAt(entity.DeletedAt)
 	domain.SetIsActive(entity.IsActive)
+
+	return domain
+}
+
+func ConvertAddressEntityToDomain(
+	entity address_entity.AddressEntity,
+) address_domain.AddressDomainInterface {
+	domain := address_domain.NewAddressDomain(
+		entity.City,
+		entity.Street,
+		entity.Number,
+		entity.CEP,
+	)
+
+	domain.SetID(entity.ID.Hex())
+	domain.SetIsValid(entity.IsValid)
 
 	return domain
 }
