@@ -1,0 +1,41 @@
+package products_repository
+
+import (
+	"quentinha_golang/src/configuration/rest_err"
+	"quentinha_golang/src/model/domain/products_domain"
+
+	"go.mongodb.org/mongo-driver/v2/mongo"
+)
+
+func NewProductsRepository(
+	databaseConnection *mongo.Database,
+) ProductsRepository {
+	return &productsRepository{
+		databaseConnection: databaseConnection,
+	}
+}
+
+type productsRepository struct {
+	databaseConnection *mongo.Database
+}
+
+type ProductsRepository interface {
+	CreateProduct(
+		userDomain products_domain.ProductDomainInterface,
+	) (products_domain.ProductDomainInterface, *rest_err.RestErr)
+
+	FindAllProducts(offset, limit int64) ([]products_domain.ProductDomainInterface, int64, *rest_err.RestErr)
+
+	FindProductsByID(id string) (products_domain.ProductDomainInterface, *rest_err.RestErr)
+
+	// FindUserByID(id string) (users_domain.UserDomainInterface, *rest_err.RestErr)
+
+	UpdateProduct(
+		productId string,
+		userDomain products_domain.ProductDomainInterface,
+	) *rest_err.RestErr
+
+	DeleteProduct(
+		productId string,
+	) *rest_err.RestErr
+}
